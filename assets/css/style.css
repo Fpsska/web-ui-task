@@ -96,6 +96,7 @@ button {
 }
 
 .card {
+    /* min-height: 535px; */
     max-width: 440px;
     background-color: var(--white-color);
     box-shadow: 10px 10px 60px #e2e7ff;
@@ -259,10 +260,13 @@ button {
 
 .payment {
     display: grid;
-    grid-row-gap: 54px;
+    /* grid-row-gap: 54px; */
     align-items: flex-end;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
+}
+.payment-failed {
+    grid-template-rows: repeat(3, auto);
 }
 .payment__image {
     display: block;
@@ -271,5 +275,8 @@ button {
 .payment__button {
     width: 100%;
 }
+.payment__button-danger {
+    background-color: var(--red-color);
+}
 
-/* /.successfull_payment page */
+/* /.payment pages */
