@@ -26,15 +26,6 @@ body {
     font-size: 16px;
 }
 
-:root {
-    --primary-color: #1c154e;
-    --secondary-color: #d0d3e2;
-    --white-color: #ffffff;
-    --grey-color: #e1e3ee;
-    --green-color: #23c967;
-    --red-color: #ea717f;
-}
-
 a {
     text-decoration: none;
 }
@@ -62,7 +53,42 @@ button {
     border: none;
 }
 
-/* /. roots & nullstyles */
+/* /. nullstyles */
+
+:root {
+    --primary-color: #1c154e;
+    --secondary-color: #d0d3e2;
+    --white-color: #ffffff;
+    --grey-color: #e1e3ee;
+    --green-color: #23c967;
+    --red-color: #ea717f;
+}
+
+.btn {
+    background-color: var(--green-color);
+    border-radius: 16px;
+    color: var(--white-color);
+    font-family: "Gilroy-Bold";
+    font-size: 18px;
+    padding: 12px 15px;
+}
+
+.title {
+    font-family: "Gilroy-Bold";
+    font-size: 18px;
+    color: var(--primary-color);
+}
+.title-green {
+    color: var(--green-color);
+}
+
+.subtitle {
+    font-family: "Gilroy-Medium";
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+/* /. roots */
 
 .main {
     min-height: 100vh;
@@ -81,7 +107,7 @@ button {
 }
 
 .card__wrapper {
-    padding: 22px 34px 34px 34px;
+    padding: 22px 34px 62px 34px;
     position: relative;
     z-index: 10;
 }
@@ -124,27 +150,7 @@ button {
     grid-template-rows: repeat(4, min-content);
 }
 
-.form__title {
-    font-family: "Gilroy-Bold";
-    font-size: 18px;
-    color: var(--primary-color);
-}
-.form__subtitle {
-    font-family: "Gilroy-Medium";
-    font-size: 16px;
-    color: var(--primary-color);
-}
-.form__title-green {
-    color: var(--green-color);
-}
-.form__button {
-    background-color: var(--green-color);
-    border-radius: 16px;
-    color: var(--white-color);
-    font-family: "Gilroy-Bold";
-    font-size: 18px;
-    padding: 10px 70px;
-}
+
 .form__input {
     font-family: "Gilroy-Medium";
     font-size: 16px;
@@ -178,9 +184,6 @@ button {
 
 /* /.main page */
 
-.card__wrapper-products {
-    padding: 22px 34px 52px 34px;
-}
 .form-choose {
     display: grid;
     grid-row-gap: 14px;
@@ -233,7 +236,6 @@ button {
 
 .form-choose__button {
     width: 100%;
-    padding: 12px 15px;
 }
 .form-choose__text {
     display: grid;
@@ -254,3 +256,20 @@ button {
 }
 
 /* /.selection page */
+
+.payment {
+    display: grid;
+    grid-row-gap: 54px;
+    align-items: flex-end;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+}
+.payment__image {
+    display: block;
+    margin: auto;
+}
+.payment__button {
+    width: 100%;
+}
+
+/* /.successfull_payment page */
