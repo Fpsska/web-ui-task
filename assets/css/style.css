@@ -85,19 +85,20 @@ button {
     position: relative;
     z-index: 10;
 }
-.card__wrapper::before {
+/* .card__wrapper::before {
     content: url(../image/decoration.svg);
     position: absolute;
     top: -2.5%;
     left: 84%;
     z-index: 0;
-}
+} */
 
 .form {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
 }
+
 .form__section_1 {
     display: grid;
     grid-template-columns: 1fr;
@@ -122,6 +123,7 @@ button {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, min-content);
 }
+
 .form__title {
     font-family: "Gilroy-Bold";
     font-size: 18px;
@@ -173,3 +175,82 @@ button {
     font-size: 14px;
     color: #afb4cc;
 }
+
+/* /.main page */
+
+.card__wrapper-products {
+    padding: 22px 34px 52px 34px;
+}
+.form-choose {
+    display: grid;
+    grid-row-gap: 14px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+}
+.form-choose__column {
+    display: grid;
+    align-items: center;
+    grid-column-gap: 10px;
+    grid-template-columns: auto 1fr;
+    border: 1px solid #e1e3ee;
+    padding: 16px 42px 16px 16px;
+}
+.form-choose__column:first-child {
+    border-radius: 15px 15px 0px 0px;
+}
+.form-choose__column:last-child {
+    border-radius: 0px 0px 25px 25px;
+}
+
+.form-choose__input {
+    display: none;
+}
+.custom-radio {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--grey-color);
+    border-radius: 50%;
+    position: relative;
+}
+.custom-radio::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--green-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.1s linear;
+}
+.form-choose__input:checked + .custom-radio::before {
+    opacity: 1;
+}
+
+.form-choose__button {
+    width: 100%;
+    padding: 12px 15px;
+}
+.form-choose__text {
+    display: grid;
+    grid-row-gap: 4px;
+}
+.form-choose__title {
+    font-family: "Gilroy-SemiBold";
+    font-size: 16px;
+    color: #000;
+}
+.form-choose__subtitle {
+    font-family: "Gilroy-Medium";
+    font-size: 13px;
+    color: #a7a2cb;
+}
+.form-choose__subtitle.active {
+    color: var(--green-color);
+}
+
+/* /.selection page */
