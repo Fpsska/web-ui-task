@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/image/favicon.png" type="image/x-icon">
 
+    <link rel="stylesheet" href="./assets/css/simplebar.css">
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/media.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -65,31 +66,37 @@
     <main class="main">
         <div class="card">
             <div class="card__wrapper">
-                <form class="card__form form" action="#" enctype="" method="">
+                <form class="card__form form" action="/assets/_html/products.html" target="_blank">
 
-                    <fieldset class="form__section_1">
-                        <legend class="title">Info</legend>
-                        <label class="subtitle" for="mail">Enter your email address</label>
-                        <input class="form__input" type="email" placeholder="team@checkforpatent.com" id="mail"
-                            required>
+                    <fieldset>
+                        <div class="form__section_1">
+                            <span class="title">Info</span>
+                            <label class="subtitle" for="mail">Enter your email address
+                                <input class="form__input" type="email" value="team@checkforpatent.com"
+                                    placeholder="team@checkforpatent.com" id="mail" required>
+                            </label>
+                        </div>
                     </fieldset>
 
-                    <fieldset class="form__section_2">
-                        <legend class="title">Product 1</legend>
-                        <label class="subtitle" for="keyword">Enter main keyword for the product</label>
-                        <input class="form__input" type="text" placeholder="for example, sylicon wine cup" id="keyword"
-                            required>
-                    </fieldset>
+                    <fieldset>
+                        <div class="form__section_2">
+                            <span class="title">Product 1</span>
+                            <label class="subtitle" for="keyword">Enter main keyword for the product
+                                <input class="form__input" type="text" value="sylicon"
+                                    placeholder="for example, sylicon wine cup" id="keyword" required>
+                            </label>
 
-                    <fieldset class="form__section_3">
-                        <label class="subtitle" for="link">Enter link to the similar product as a
-                            reference</label>
-                        <input class="form__input" type="url" placeholder="https://..." id="link" required>
+                            <label class="subtitle" for="link">Enter link to the similar product as a
+                                reference
+                                <input class="form__input" type="url" value="https://..." placeholder="https://..."
+                                    id="link" required>
+                            </label>
+                        </div>
                     </fieldset>
 
                     <div class="form__section_4">
                         <div class="form__products">
-                            <a class="title title-green" href="#">Add more products</a>
+                            <a class="title title-green" href="/assets/_html/products.html" target="_blank">Add more products</a>
                             <svg class="form__svg">
                                 <use xlink:href="#add"></use>
                             </svg>
@@ -115,6 +122,7 @@
     </footer>
 
     <script src="./assets/js/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/simplebar.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 

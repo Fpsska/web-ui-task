@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../image/favicon.png" type="image/x-icon">
 
+    <link rel="stylesheet" href="../css/simplebar.css">
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/media.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -24,64 +25,97 @@
         <div class="card">
             <div class="card__wrapper">
 
-                <form class="card__form form-choose" action="#" enctype="" method="">
-
+                <form class="card__form form-choose" action="#" onSubmit="return false">
                     <div class="form-choose__section_1">
                         <h1 class="title">Adding more products</h1>
                         <span class="subtitle">The more items you check, the better the price.</span>
                     </div>
 
                     <div class="form-choose__section_2">
+
                         <fieldset class="form-choose__column">
-                            <input class="form-choose__input" type="radio" name="product" id="example-1" required>
+                            <input class="form-choose__input" type="radio" name="product">
                             <span class="custom-radio"></span>
-                            <label class="form-choose__text" for="example-1">
+                            <label class="form-choose__text">
                                 <span class="form-choose__title">5 products for 80 usd / 16$ for each</span>
-                                <span class="form-choose__subtitle active">You safe 36% on each patent check</span>
+                                <span class="form-choose__subtitle">You safe 36% on each patent check</span>
                             </label>
                         </fieldset>
 
                         <fieldset class="form-choose__column">
-                            <input class="form-choose__input" type="radio" name="product" id="example-2" required>
+                            <input class="form-choose__input" type="radio" name="product">
                             <span class="custom-radio"></span>
-                            <label class="form-choose__text" for="example-2">
+                            <label class="form-choose__text">
                                 <span class="form-choose__title">4 products for 72 usd / 18$ for each</span>
                                 <span class="form-choose__subtitle">You safe 28% on each patent check</span>
                             </label>
                         </fieldset>
 
                         <fieldset class="form-choose__column">
-                            <input class="form-choose__input" type="radio" name="product" id="example-3" required>
+                            <input class="form-choose__input" type="radio" name="product">
                             <span class="custom-radio"></span>
-                            <label class="form-choose__text" for="example-3">
+                            <label class="form-choose__text">
                                 <span class="form-choose__title">3 products for 60 usd / 20$ for each</span>
                                 <span class="form-choose__subtitle">You safe 20% on each patent check</span>
                             </label>
                         </fieldset>
 
                         <fieldset class="form-choose__column">
-                            <input class="form-choose__input" type="radio" name="product" id="example-4" required>
+                            <input class="form-choose__input" type="radio" name="product">
                             <span class="custom-radio"></span>
-                            <label class="form-choose__text" for="example-4">
+                            <label class="form-choose__text">
                                 <span class="form-choose__title">2 products for 44 usd / 22$ for each</span>
                                 <span class="form-choose__subtitle">You safe 12% on each patent check</span>
                             </label>
                         </fieldset>
 
                         <fieldset class="form-choose__column">
-                            <input class="form-choose__input" type="radio" name="product" id="example-5" required>
+                            <input class="form-choose__input" type="radio" name="product">
                             <span class="custom-radio"></span>
-                            <label class="form-choose__text" for="example-5">
+                            <label class="form-choose__text">
                                 <span class="form-choose__title">1 product for 24.99 usd</span>
                             </label>
                         </fieldset>
                     </div>
 
                     <div class="form-choose__section_3">
-                        <button class="btn form-choose__button" type="submit">Continue</button>
+                        <button class="btn form-choose__button" type="submit" disabled>Continue</button>
                     </div>
-
                 </form>
+
+                <div class="content">
+                    <form class="form form-content" action="/assets/_html/successfull_payment.html" target="_blank">
+
+                        <div class="content__section_1">
+
+                            <fieldset class="form__fieldset">
+                                <div class="form__section_2">
+                                    <div class="form__title">
+                                        <span class="title">Product 1</span>
+                                        <button class="btn-close" type="button"></button>
+                                    </div>
+
+                                    <label class="subtitle">Enter main keyword for the product
+                                        <input class="form__input" type="text"
+                                            placeholder="for example, sylicon wine cup" required>
+                                    </label>
+                                    <label class="subtitle">Enter link to the similar product as a
+                                        reference
+                                        <input class="form__input" type="url" placeholder="https://..." required>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+
+                        </div>
+
+                        <div class="content__section_2">
+                            <button class="btn content__btn" type="submit">Submit and Pay 80 USD</button>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
         </div>
     </main>
@@ -91,6 +125,7 @@
     </footer>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/simplebar.js"></script>
     <script src="../js/main.js"></script>
 </body>
 
