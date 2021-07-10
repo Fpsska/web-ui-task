@@ -38,8 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // /. active products
 
+    // Task: элемент находится за пределом скрола родительского элемента - убираем атрибут required 
+
     // let closeBtn = document.querySelector(".btn-close");
-    // let productBlock = document.querySelectorAll(".form__section_2");
+    let product = document.querySelector(".form__section-required");
+    let productContainer = document.querySelector(".form-content");
+
+    let parentVH = productContainer.offsetHeight; // высота блока form-content
+    console.log(parentVH)
+    let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
+    console.log(blockPosition)
+
+    let productInput = document.querySelector(".form__input")
+
+
+
+
+
 
 
     // closeBtn.addEventListener("click", () => {  // убирает конкрентный блок form__section_2
@@ -50,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // /.remove product
 
+
+    // /. remove popup required message
     let switchButton = document.querySelector(".form-choose__button");
 
     let content = document.querySelector(".content");
@@ -71,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // изменение цены ТУТ
         let payBtn = document.querySelector(".content__btn");
-        
+
 
         // /. dublicate template
     }
