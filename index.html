@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/image/favicon.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="./assets/css/simplebar.css">
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/media.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -66,7 +64,7 @@
     <main class="main">
         <div class="card">
             <div class="card__wrapper">
-                <form class="card__form form" action="/assets/_html/products.html" target="_blank">
+                <form class="card__form form form-decoration" action="/assets/_html/products.html" target="_blank">
 
                     <fieldset>
                         <div class="form__section_1">
@@ -96,10 +94,19 @@
 
                     <div class="form__section_4">
                         <div class="form__products">
-                            <a class="title title-green" href="/assets/_html/products.html" target="_blank">Add more products</a>
-                            <svg class="form__svg">
-                                <use xlink:href="#add"></use>
-                            </svg>
+
+                            <div class="form__title">
+
+                                <button class="title title-green">Add more products</button>
+                                <!-- <a class="title title-green" href="/assets/_html/products.html" target="_blank">Add more products</a> -->
+                                <svg class="form__svg">
+                                    <use xlink:href="#add"></use>
+                                </svg>
+
+                            </div>
+
+
+
                         </div>
                         <span class="subtitle">We offer discount up to 36% for multiple checks</span>
                         <button class="btn form__button" type="submit">Submit and Pay 24.99 USD</button>
@@ -121,8 +128,6 @@
         <!--  -->
     </footer>
 
-    <script src="./assets/js/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/simplebar.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 

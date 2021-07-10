@@ -83,6 +83,8 @@ button {
 }
 .title-green {
     color: var(--green-color);
+    font-family: "Gilroy-SemiBold";
+    padding: 0;
 }
 
 .subtitle {
@@ -112,23 +114,24 @@ button {
 
 .card__wrapper {
     padding: 22px 34px 62px 34px;
-    position: relative;
-    z-index: 10;
 }
-/* .card__wrapper::before {
+
+
+.form {
+    display: grid;
+    grid-row-gap: 16px;
+    grid-template-columns: 1fr;
+    grid-template-rows: .65fr .75fr 1fr;
+    min-height: 451px;
+    position: relative;
+}
+/* 
+.form-decoration::before {
     content: url(../image/decoration.svg);
     position: absolute;
     top: -2.5%;
     left: 84%;
-    z-index: 0;
 } */
-
-.form {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    min-height: 451px;
-}
 
 .form__section_1 {
     display: grid;
@@ -145,7 +148,8 @@ button {
 
 .form__section_4 {
     display: grid;
-    grid-row-gap: 10px;
+    align-content: flex-end;
+    grid-row-gap: 14px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, auto);
 }
@@ -165,12 +169,11 @@ button {
 .form__svg-lock {
     margin: 0 0 0 auto;
 }
-.form__products {
+/* .form__products {
     display: grid;
-    grid-column-gap: 10px;
     grid-template-columns: max-content 1fr;
     align-items: center;
-}
+} */
 .form__protection {
     display: grid;
     grid-column-gap: 10px;
@@ -284,14 +287,16 @@ button {
 
 /* /.payment pages */
 
+
 .btn-close {
     background-image: url(../image/x-mark.svg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     width: 13px;
-    height: 13px;
+    height: 14px;
 }
+
 
 .form__section_2.hidden {
     display: none;
@@ -341,20 +346,6 @@ button {
     background-color: var(--grey-color);
     transition: linear 0.5s;
 }
-/* .simplebar-track.simplebar-vertical {
-    background-color: var(--grey-color);
-    width: 4px;
-}
-.simplebar-scrollbar::before {
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--green-color);
-}
-.simplebar-scrollbar.simplebar-visible::before {
-    opacity: 1;
-} */
 
 .simplebar-content fieldset {
     margin-bottom: 38px;

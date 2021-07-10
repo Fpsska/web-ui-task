@@ -65,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
             templateItem.querySelector(".title").innerText=`Products ${i}`;
             templateParent.appendChild(templateItem);
         }
+
+        // изменение цены ТУТ
     }
 
 
