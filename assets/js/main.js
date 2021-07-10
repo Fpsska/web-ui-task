@@ -6,30 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     productStack.forEach(item => {
         item.addEventListener("click", () => {
-            productStack.forEach(item => {
+            productStack.forEach(item => {    // убирает всем элементам form-choose__column класс "selected"
                 item.classList.remove("selected")
             })
-            productText.forEach(item => {
+            productText.forEach(item => {     // убирает всем элементам form-choose__subtitle класс "selected" 
                 item.classList.remove("selected")
             })
             inputs.forEach(item => {
-                item.removeAttribute("checked")
+                item.removeAttribute("checked") // убирает всем элементам form-choose__input атрибут "checked" 
             })
+            // /. удаление классов по клику
 
-            item.classList.add("selected");
-            const elementIndex = Array.from(productStack).indexOf(item);
-            if (productText[elementIndex] !== undefined) {
+            item.classList.add("selected");     // добавляет класс selected элементу form-choose__column
+
+            const elementIndex = Array.from(productStack).indexOf(item); // получение индекса каждого элемента form-choose__column 
+
+
+            if (productText[elementIndex] !== undefined) {               // выдаёт класс selected, при отсутствия класса form-choose__subtitle 
                 productText[elementIndex].classList.add("selected");
             }
 
 
-            let reverseIdx = Array.from(productStack).reverse().indexOf(item)
-            switchNumber(reverseIdx + 1);
+            let reverseIdx = Array.from(productStack).reverse().indexOf(item) // реверс массива для вывода товара в правильном порядке
+            switchNumber(reverseIdx + 1);                                     // прибавляет к реверсированному массиву 1 элемент (блок form__fieldset)
 
 
-            inputs[elementIndex].setAttribute("checked", "")
-
-            switchButton.removeAttribute("disabled");
+            inputs[elementIndex].setAttribute("checked", "")  // устанавливет атрибут checked выбранному элементу INPUT в зависимости от индекса
+            switchButton.removeAttribute("disabled");         // делает кноку Continue интерактивной (по умолчанию установлен disabled)
         })
     });
 
@@ -52,24 +55,27 @@ document.addEventListener("DOMContentLoaded", () => {
     let content = document.querySelector(".content");
     let formChoose = document.querySelector(".form-choose");
 
-    switchButton.addEventListener("click", () => {
+    switchButton.addEventListener("click", () => {  // менят порядок отображение блоков по нажатию кнопки Continue 
         content.style.setProperty("display", "block", "important");
         formChoose.style.setProperty("display", "none", "important");
     })
 
     let templateParent = document.querySelector(".content__section_1");
 
-    let switchNumber = (number) => {
-        for (let i = 2; i <= number; i++) {
-            let templateItem = document.querySelector(".form__fieldset").cloneNode(true);
-            templateItem.querySelector(".title").innerText=`Products ${i}`;
-            templateParent.appendChild(templateItem);
+    let switchNumber = (number) => {          // функция динамического изменения порядкового значения элемента .title
+        for (let i = 2; i <= number; i++) {  // пока итерируемый элемент (i) будет меньше, или равен входящему числу number
+            let templateItem = document.querySelector(".form__fieldset").cloneNode(true);  // клонирует выбранную HTML-структуру элементов 
+            templateItem.querySelector(".title").innerText = `Products ${i}`;              // меняет дочернему элементу .title текстовый контент
+            templateParent.appendChild(templateItem);                                      // добавляет изменённый элемент .title в конец списка дочерних элементов
         }
 
         // изменение цены ТУТ
+        let payBtn = document.querySelector(".content__btn");
+        
+
+        // /. dublicate template
     }
 
 
-    // /. dublicate template
 
 })
