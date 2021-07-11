@@ -1,0 +1,23 @@
+@media (max-width: 411px) {
+    .form-choose__column {
+        padding: 14px 10px 14px 16px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .card__wrapper {
+        padding: 18px 10px 22px 10px !important;
+    }
+}
+
+@media (max-width: 823px) and (orientation: landscape) {
+    .main {
+        height: 100%;
+        width: 100%;
+    }
+    .card {
+        position: static !important;
+        transform: translate(0, 0) !important;
+        margin: 0 auto;
+    }
+}

@@ -108,25 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-    // Task: элемент находится за пределом скрола родительского элемента - убираем атрибут required 
-
-    // getComputedStyle(content).display == 'block'
-
-
-    // requiredPopup()
-
-
-
-    // let productOffset = document.querySelector(".form__section-required").offsetTop;
-
-    // let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
-    // console.log(blockPosition)
-
-    // let productInput = document.querySelector(".form__input")
-
-
-
-    // /. remove popup required message
-
 })
