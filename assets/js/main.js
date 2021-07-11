@@ -6,85 +6,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
     productStack.forEach(item => {
         item.addEventListener("click", () => {
-            productStack.forEach(item => {    // убирает всем элементам form-choose__column класс "selected"
+            productStack.forEach(item => {
                 item.classList.remove("selected")
             })
-            productText.forEach(item => {     // убирает всем элементам form-choose__subtitle класс "selected" 
+            productText.forEach(item => {
                 item.classList.remove("selected")
             })
             inputs.forEach(item => {
-                item.removeAttribute("checked") // убирает всем элементам form-choose__input атрибут "checked" 
+                item.removeAttribute("checked")
             })
-            // /. удаление классов по клику
 
-            item.classList.add("selected");     // добавляет класс selected элементу form-choose__column
+            // /. deleting classes / attribute on click event
 
-            const elementIndex = Array.from(productStack).indexOf(item); // получение индекса каждого элемента form-choose__column 
+            item.classList.add("selected");
+
+            const elementIndex = Array.from(productStack).indexOf(item); // get the index of each form-choose__column item
 
 
-            if (productText[elementIndex] !== undefined) {               // выдаёт класс selected, при отсутствия класса form-choose__subtitle 
+            if (productText[elementIndex] !== undefined) {               // assigns the selected class if there is no form-choose__subtitle class
                 productText[elementIndex].classList.add("selected");
             }
 
 
-            let reverseIdx = Array.from(productStack).reverse().indexOf(item) // реверс массива для вывода товара в правильном порядке
-            switchNumber(reverseIdx + 1);                                     // прибавляет к реверсированному массиву 1 элемент (блок form__fieldset)
+            let reverseIdx = Array.from(productStack).reverse().indexOf(item) // reverse the array to display the product in the correct order
+            switchNumber(reverseIdx + 1);                                     // add 1 element to the reversed array (form__fieldset block)
 
 
-            inputs[elementIndex].setAttribute("checked", "")  // устанавливет атрибут checked выбранному элементу INPUT в зависимости от индекса
-            switchButton.removeAttribute("disabled");         // делает кноку Continue интерактивной (по умолчанию установлен disabled)
+            inputs[elementIndex].setAttribute("checked", "");  // sets the checked attribute of the selected INPUT element based on the index
+            switchButton.removeAttribute("disabled");         // makes the Continue button interactive (disabled by default)
         })
     });
 
     // /. active products
 
-    // Task: элемент находится за пределом скрола родительского элемента - убираем атрибут required 
-
-    // let product = document.querySelector(".form__section-required");
-    // let productContainer = document.querySelector(".form-content");
-
-    // let parentVH = productContainer.offsetHeight; // высота блока form-content
-    // console.log(parentVH)
-    // let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
-    // console.log(blockPosition)
-
-    // let productInput = document.querySelector(".form__input")
-
-
-
-    // /. remove popup required message
 
     let switchButton = document.querySelector(".form-choose__button");
     let content = document.querySelector(".content");
     let formChoose = document.querySelector(".form-choose");
 
-    switchButton.addEventListener("click", () => {  // менят порядок отображение блоков по нажатию кнопки Continue 
-        content.style.setProperty("display", "block", "important");
-        formChoose.style.setProperty("display", "none", "important");
+    switchButton.addEventListener("click", () => {  // changes the order of displaying blocks by pressing the Continue button
+        content.style.display = "block";
+        formChoose.style.display = "none";
     })
 
     let templateParent = document.querySelector(".content__section_1");
 
 
-    let switchNumber = (number) => {              // функция создания нужного кол-ва элементов form__fieldset 
-        let templateItem = document.querySelector(".form__fieldset").cloneNode(true);  // клонирует выбранную HTML-структуру первого элемента form__fieldset
-        while (templateParent.firstChild) {       // чистит список элементов form__fieldset
+    let switchNumber = (number) => {              // function for creating the required number of elements form__fieldset
+        let templateItem = document.querySelector(".form__fieldset").cloneNode(true);  // clones the selected HTML structure of the first form__fieldset element
+
+        while (templateParent.firstChild) {       // clears the list of form__fieldset elements
             templateParent.removeChild(templateParent.firstChild);
         }
-        templateParent.appendChild(templateItem); // создаёт первый элемент
+        templateParent.appendChild(templateItem); // creates the first element
 
-        // /. обнуление списка товаров
+        // /. resetting the product list
 
-        for (let i = 2; i <= number; i++) {       // пока итерируемый элемент (i) будет меньше, или равен входящему числу number
+
+
+        for (let i = 2; i <= number; i++) {
             let templateItem = document.querySelector(".form__fieldset").cloneNode(true);
-            templateItem.querySelector(".title").innerText = `Products ${i}`;              // меняет дочернему элементу .title текстовый контент
-            templateParent.appendChild(templateItem);                                      // добавляет новый изменённый блок-элемент в конец списка дочерних элементов
+            templateItem.querySelector(".title").innerText = `Products ${i}`;              // change the text content of the .title child
+            templateParent.appendChild(templateItem);                                      // adds a new modified block element to the end of the list of children
             templateItem.setAttribute("data-mark", `${i}`);
         }
 
         // /. dublicate template
 
-        let counter = number;  // текущее число товаров в корзине
+        let counter = number;  // current number of items in the cart
         let productBlocks = document.querySelectorAll(".form__fieldset");
         productBlocks.forEach(item => {
             item.querySelector(".btn-close").addEventListener("click", () => {
@@ -98,9 +87,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // /.remove product
 
-        let payGenerate = (value ) => {
-            const sumArr = [24.99, 44, 60, 72, 80];  // прайс-лист
-            document.querySelector(".content__btn").innerText = `Submit and Pay ${sumArr[value - 1]} USD`;
+        let payGenerate = (value) => {
+            const sumArr = [24.99, 44, 60, 72, 80];  // price list
+
+            if (value <= 0) {
+                document.querySelector(".content__btn").innerText = "Nothing selected";
+            } else {
+                document.querySelector(".content__btn").innerText = `Submit and Pay ${sumArr[value - 1]} USD`;
+            }
+
+            if (document.querySelector(".content__btn").innerText == 'Nothing selected') {
+                document.querySelector(".content__btn").addEventListener("click", () => {
+                    window.location.replace('./failed_payment.html');
+                })
+            }
         }
         payGenerate(number);
 
@@ -108,5 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+
+    // Task: элемент находится за пределом скрола родительского элемента - убираем атрибут required 
+
+    // getComputedStyle(content).display == 'block'
+
+
+    // requiredPopup()
+
+
+
+    // let productOffset = document.querySelector(".form__section-required").offsetTop;
+
+    // let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
+    // console.log(blockPosition)
+
+    // let productInput = document.querySelector(".form__input")
+
+
+
+    // /. remove popup required message
 
 })
