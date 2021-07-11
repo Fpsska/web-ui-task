@@ -298,7 +298,7 @@ button {
 }
 
 
-.form__section_2.hidden {
+.form__fieldset.hidden {
     display: none;
 }
 .form__title {
@@ -342,20 +342,8 @@ button {
     background-color: var(--green-color);
     border-radius: 9em;
 }
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--grey-color);
-    transition: linear 0.5s;
-}
 
-.simplebar-content fieldset {
-    margin-bottom: 38px;
-}
-.simplebar-content fieldset:last-child {
-    margin-bottom: 0;
-}
-.simplebar-content .form__section_2 {
-    grid-row-gap: 18px;
-}
-.simplebar-content .form__input {
+.content .form__input {
     width: 96%;
-}
+} 
+

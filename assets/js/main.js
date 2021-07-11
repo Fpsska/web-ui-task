@@ -40,35 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Task: элемент находится за пределом скрола родительского элемента - убираем атрибут required 
 
-    // let closeBtn = document.querySelector(".btn-close");
-    let product = document.querySelector(".form__section-required");
-    let productContainer = document.querySelector(".form-content");
+    // let product = document.querySelector(".form__section-required");
+    // let productContainer = document.querySelector(".form-content");
 
-    let parentVH = productContainer.offsetHeight; // высота блока form-content
-    console.log(parentVH)
-    let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
-    console.log(blockPosition)
+    // let parentVH = productContainer.offsetHeight; // высота блока form-content
+    // console.log(parentVH)
+    // let blockPosition = product.offsetHeight;        // положение блока form__fieldset от верха родителя form-content
+    // console.log(blockPosition)
 
-    let productInput = document.querySelector(".form__input")
+    // let productInput = document.querySelector(".form__input")
 
-
-
-
-
-
-
-    // closeBtn.addEventListener("click", () => {  // убирает конкрентный блок form__section_2
-    //     productBlock.forEach(item => {
-    //         item.classList.add("hidden");
-    //     })
-    // })
-
-    // /.remove product
 
 
     // /. remove popup required message
-    let switchButton = document.querySelector(".form-choose__button");
 
+    let switchButton = document.querySelector(".form-choose__button");
     let content = document.querySelector(".content");
     let formChoose = document.querySelector(".form-choose");
 
@@ -79,20 +65,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let templateParent = document.querySelector(".content__section_1");
 
-    let switchNumber = (number) => {          // функция динамического изменения порядкового значения элемента .title
-        for (let i = 2; i <= number; i++) {  // пока итерируемый элемент (i) будет меньше, или равен входящему числу number
-            let templateItem = document.querySelector(".form__fieldset").cloneNode(true);  // клонирует выбранную HTML-структуру элементов 
+
+    let switchNumber = (number) => {              // функция создания нужного кол-ва элементов form__fieldset 
+        let templateItem = document.querySelector(".form__fieldset").cloneNode(true);  // клонирует выбранную HTML-структуру первого элемента form__fieldset
+        while (templateParent.firstChild) {       // чистит список элементов form__fieldset
+            templateParent.removeChild(templateParent.firstChild);
+        }
+        templateParent.appendChild(templateItem); // создаёт первый элемент
+
+        // /. обнуление списка товаров
+
+        for (let i = 2; i <= number; i++) {       // пока итерируемый элемент (i) будет меньше, или равен входящему числу number
+            let templateItem = document.querySelector(".form__fieldset").cloneNode(true);
             templateItem.querySelector(".title").innerText = `Products ${i}`;              // меняет дочернему элементу .title текстовый контент
-            templateParent.appendChild(templateItem);                                      // добавляет изменённый элемент .title в конец списка дочерних элементов
+            templateParent.appendChild(templateItem);                                      // добавляет новый изменённый блок-элемент в конец списка дочерних элементов
+            templateItem.setAttribute("data-mark", `${i}`);
         }
 
-        // изменение цены ТУТ
-        let payBtn = document.querySelector(".content__btn");
-
-
         // /. dublicate template
-    }
 
+        let counter = number;  // текущее число товаров в корзине
+        let productBlocks = document.querySelectorAll(".form__fieldset");
+        productBlocks.forEach(item => {
+            item.querySelector(".btn-close").addEventListener("click", () => {
+                if (item.parentNode) {
+                    item.parentNode.removeChild(item);
+                }
+                counter -= 1;
+                payGenerate(counter);
+            })
+        })
+
+        // /.remove product
+
+        let payGenerate = (value ) => {
+            const sumArr = [24.99, 44, 60, 72, 80];  // прайс-лист
+            document.querySelector(".content__btn").innerText = `Submit and Pay ${sumArr[value - 1]} USD`;
+        }
+        payGenerate(number);
+
+        // /.price change
+
+    }
 
 
 })
