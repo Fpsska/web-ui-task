@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let i = 2; i <= number; i++) {
             let templateItem = document.querySelector(".form__fieldset").cloneNode(true);
-            templateItem.querySelector(".title").innerText = `Products ${i}`;              // change the text content of the .title child
+            templateItem.querySelector(".title").innerText = `Product ${i}`;              // change the text content of the .title child
             templateParent.appendChild(templateItem);                                      // adds a new modified block element to the end of the list of children
             templateItem.setAttribute("data-mark", `${i}`);
         }
