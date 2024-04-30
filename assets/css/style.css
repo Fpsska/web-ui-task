@@ -210,6 +210,10 @@ button {
 }
 .form-choose__column.selected {
     background-color: #f4f5fa;
+
+    .form-choose__subtitle {
+        color: var(--green-color);
+    }
 }
 .form-choose__column:first-child {
     border-radius: 15px 15px 0px 0px;
@@ -218,7 +222,20 @@ button {
     border-radius: 0px 0px 25px 25px;
 }
 
+.form-choose__button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
 /* _______________ */
+
 .form-choose__input {
     display: none;
 }
@@ -263,9 +280,6 @@ button {
     font-family: "Gilroy-Medium";
     font-size: 13px;
     color: #a7a2cb;
-}
-.form-choose__subtitle.selected {
-    color: var(--green-color);
 }
 
 /* /.selection page */
