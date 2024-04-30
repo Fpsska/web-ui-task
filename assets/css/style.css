@@ -214,6 +214,10 @@ button {
     .form-choose__subtitle {
         color: var(--green-color);
     }
+    
+    .custom-radio::before {  /* TODO: add coniditon .form-choose__input:checked + */
+        opacity: 1;
+    }
 }
 .form-choose__column:first-child {
     border-radius: 15px 15px 0px 0px;
@@ -262,9 +266,10 @@ button {
     opacity: 0;
     transition: 0.1s linear;
 }
-.form-choose__input:checked + .custom-radio::before {
+/* .form-choose__input:checked + .custom-radio::before {
     opacity: 1;
-}
+} */
+
 /*_____ /.radio______*/
 
 .form-choose__text {

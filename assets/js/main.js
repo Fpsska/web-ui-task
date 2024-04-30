@@ -58,18 +58,15 @@ init() {
     if (!productWrapper || !this.state.products?.length) return;
     this.state.products.forEach((item) => productWrapper.appendChild(this.generate(item)));
 
-    const productTemplatesMask = document.querySelectorAll(".mask");
-    if (!productTemplatesMask?.length) return;
-    productTemplatesMask.forEach((item) => item.addEventListener('click', (e) => {
-        console.log(item);
-        this.update(e);
-    }));
+    this.actions('register-products-listener');
+
+    const productForm = document.querySelector(".form-choose");
+    if (!productForm) productForm.addEventListener('submit', (e) => this.actions('submit-products-form', e));
 },
 generate(item) {
-    console.log('GENERATE', item);
+    console.log('GENERATE');
     const product = document.createElement('fieldset');
     product.classList.add('form-choose__column', item.isSelected ? 'selected' : 'form-choose__column');
-    product.setAttribute('id', item.id);
     product.innerHTML = `
         <input class="form-choose__input" type="radio" name="product" checked=${item.isSelected}>
         <span class="custom-radio"></span>
@@ -87,29 +84,36 @@ update(e) {
     const targetId = e.target.getAttribute('id');
 
     if (!productWrapper || !targetId) return;
-    while (productWrapper.firstChild) {   // TODO: broke logic of selecting input ? 
+
+    while (productWrapper.firstChild) {  
         // delete old nodes
         productWrapper.removeChild(productWrapper.firstChild);
     }
 
     const updatedPoducts = this.state.products.map((item) => item.id === targetId ? {...item, isSelected: true} : {...item, isSelected: false});
     updatedPoducts.forEach((item) => productWrapper.appendChild(this.generate(item)));
-    console.log('updatedPoducts', updatedPoducts)
-},
-action(e) {
-    if (e === 'formSubmiting') {
-        const productForm = document.querySelector(".form-choose");
+    this.state.products = updatedPoducts;
+    console.log('updatedPoducts', updatedPoducts);
 
-        if (!productForm) return;
-    
-        productForm.addEventListener('submit', (e) => {
+    const formButton = document.querySelector('.form-choose__button');
+    if (formButton && !this.state.products.every((item) => item.isSelected)) formButton.removeAttribute('disabled');
+
+    this.actions('register-products-listener');
+},
+actions(type, e = null) {
+    switch (type) {
+        case 'submit-products-form':
             e.preventDefault();
-            if (products.every((item) => !item.isSelected)) return;
-    
-            //     content.style.display = "block";
-            //     productForm.style.display = "none";
-            console.log(e)
-        })
+            console.log(this.state.products, e);
+            break;
+        case 'register-products-listener':
+            const productTemplatesMask = document.querySelectorAll(".mask");
+
+            if (!productTemplatesMask?.length) return;
+            productTemplatesMask.forEach((item) => item.addEventListener('click', (e) => this.update(e)));
+            break;
+        default:
+            break;
     }
 },
 };
