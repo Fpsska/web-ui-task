@@ -2,7 +2,7 @@ const app = {
 state: {
     db_products: [
         {
-            id: 'uu_id_1',
+            id: 'group-1',
             items: 1,
             price: {
                 full: 24.99,
@@ -10,7 +10,7 @@ state: {
             isSelected: false
         },
         {
-            id: 'uu_id_2',
+            id: 'group-2',
             items: 2,
             price: {
                 full: 44,
@@ -20,7 +20,7 @@ state: {
             isSelected: false
         },    
         {
-            id: 'uu_id_3',
+            id: 'group-3',
             items: 3,
             price: {
                 full: 60,
@@ -30,7 +30,7 @@ state: {
             isSelected: false
         },
         {
-            id: 'uu_id_4',
+            id: 'group-4',
             items: 4,
             price: {
                 full: 72,
@@ -40,7 +40,7 @@ state: {
             isSelected: false
         },
         {
-            id: 'uu_id_5',
+            id: 'group-5',
             items: 5,
             price: {
                 full: 80,
@@ -50,14 +50,7 @@ state: {
             isSelected: false
         }
     ],
-    user_products: [
-        // {
-        //     id: 'uu_id_1',
-        // },
-        // {
-        //     id: 'uu_id_2',
-        // },
-    ],
+    user_products: [],
 },
 init() {
     console.log('init');
@@ -92,7 +85,7 @@ renderProductTemplates() {
     const wrapper = document.querySelector('.content__section_1');
     if (!product || !wrapper) return;
 
-    this.state.user_products = Array.from({ length: product.items }, () =>  ({id: this.getUUID()}));
+    this.state.user_products = Array.from({ length: product.items }, (_,idx) =>  ({id: `${product.id}__product-${idx + 1}`}));
     const productTemplate = document.createElement('fieldset');
     productTemplate.classList.add("form__fieldset", "form__fieldset-required");
     
@@ -115,10 +108,10 @@ renderProductTemplates() {
         `;
         wrapper.appendChild(productTemplate.cloneNode(true));
     }
-    // console.log('user_products>', this.state.user_products);
+    console.log('user_products>', this.state.user_products);
     this.listeners('register-delete-btn-listener');
 },
-selectProduct(e) {
+selectProduct(e) { // TODO: mb overwrite (delete only changed items, based on deleteProduct method)
     console.log('selectProduct');
     const wrapper = document.querySelector('.form-choose__section_2');
     const targetId = e.target.getAttribute('id');
@@ -141,11 +134,13 @@ selectProduct(e) {
     this.listeners('register-products-listener');
 },
 deleteProduct(e) {
+    console.log('deleteProduct');
     const targetId = e.target.getAttribute('id');
     const wrapper = document.querySelector('.content__section_1');
     if (!targetId || !wrapper) return;
 
     this.state.user_products = this.state.user_products.filter((item) => item.id !== targetId);
+    this.computeProductsPrice();
     console.log('user_products>', this.state.user_products);
 
     wrapper.childNodes.forEach((item) => {
@@ -157,10 +152,9 @@ computeProductsPrice() {
     const button = document.querySelector(".content__btn");
     const product = this.state.db_products.find((item) => item.isSelected);
     if (!button || !product) return;
-    button.innerHTML = `Submit and Pay ${product.price.full} USD`
-},
-getUUID() {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    if (this.state.user_products.length === 0) return button.innerHTML = "Nothing selected";
+    if (this.state.user_products.length === product.items) return button.innerHTML = `Submit and Pay ${product.price.full} USD`;
+    button.innerHTML = `Submit and Pay ${product.price.each * this.state.user_products.length} USD`;
 },
 listeners(type, e = null) {
     switch (type) {
@@ -174,7 +168,9 @@ listeners(type, e = null) {
             productForm.style.display = "none";
             this.renderProductTemplates();
             this.computeProductsPrice();
-            console.log(this.state.db_products, e);
+            console.log(this.state.db_products);
+            // window.location.replace('./successful_payment.html');
+            // window.location.replace('./index.html');
             break;
         case 'register-products-listener':
             const productTemplatesMask = document.querySelectorAll(".mask");
@@ -185,7 +181,7 @@ listeners(type, e = null) {
         case 'register-delete-btn-listener':
             const deleteButtons = document.querySelectorAll(".btn-close");
 
-            if (!deleteButtons) return;
+            if (!deleteButtons?.length) return;
             deleteButtons.forEach((item) => item.addEventListener('click', (e) => this.deleteProduct(e)));
         default:
             break;
