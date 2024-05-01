@@ -1,6 +1,6 @@
 const app = {
 state: {
-    products: [
+    db_products: [
         {
             id: 'uu_id_1',
             items: 1,
@@ -50,18 +50,26 @@ state: {
             isSelected: false
         }
     ],
+    user_products: [
+        // {
+        //     id: 'uu_id_1',
+        // },
+        // {
+        //     id: 'uu_id_2',
+        // },
+    ],
 },
 init() {
     console.log('init');
-    const productWrapper = document.querySelector('.form-choose__section_2');
+    const wrapper = document.querySelector('.form-choose__section_2');
 
-    if (!productWrapper || !this.state.products?.length) return;
-    this.state.products.forEach((item) => productWrapper.appendChild(this.generateAvailableProduct(item)));
+    if (!wrapper || !this.state.db_products?.length) return;
+    this.state.db_products.forEach((item) => wrapper.appendChild(this.generateAvailableProduct(item)));
 
-    this.actions('register-products-listener');
+    this.listeners('register-products-listener');
 
     const productForm = document.querySelector(".form-choose");
-    if (productForm) productForm.addEventListener('submit', (e) => this.actions('submit-products-form', e));
+    if (productForm) productForm.addEventListener('submit', (e) => this.listeners('submit-products-form', e));
 },
 generateAvailableProduct(item) {
     console.log('generateAvailableProduct');
@@ -80,19 +88,22 @@ generateAvailableProduct(item) {
 },
 renderProductTemplates() {
     console.log('renderProductTemplates');
-    const product = this.state.products.find((item) => item.isSelected);
+    const product = this.state.db_products.find((item) => item.isSelected);
     const wrapper = document.querySelector('.content__section_1');
     if (!product || !wrapper) return;
 
+    this.state.user_products = Array.from({ length: product.items }, () =>  ({id: this.getUUID()}));
     const productTemplate = document.createElement('fieldset');
     productTemplate.classList.add("form__fieldset", "form__fieldset-required");
     
-    for (let i = 0; i < product.items; i ++) {
+    for (let i = 0; i < this.state.user_products.length; i ++) {
+        const id = this.state.user_products[i].id;
+        productTemplate.setAttribute('id', id);
         productTemplate.innerHTML = `
             <div class="form__section_2">
                 <div class="form__title">
                     <span class="title">Product ${i + 1}</span>
-                    <button class="btn-close" type="button"></button>
+                    <button class="btn-close" type="button" id=${id}></button>
                 </div>
                 <label class="subtitle">Enter main keyword for the product
                     <input class="form__input" type="text" placeholder="for example, sylicon wine cup" value="for example, sylicon wine cup" required>
@@ -104,37 +115,54 @@ renderProductTemplates() {
         `;
         wrapper.appendChild(productTemplate.cloneNode(true));
     }
+    // console.log('user_products>', this.state.user_products);
+    this.listeners('register-delete-btn-listener');
 },
 selectProduct(e) {
     console.log('selectProduct');
-    const productWrapper = document.querySelector('.form-choose__section_2');
+    const wrapper = document.querySelector('.form-choose__section_2');
     const targetId = e.target.getAttribute('id');
 
-    if (!productWrapper || !targetId) return;
+    if (!wrapper || !targetId) return;
 
-    while (productWrapper.firstChild) {  
+    while (wrapper.firstChild) {  
         // delete old nodes
-        productWrapper.removeChild(productWrapper.firstChild);
+        wrapper.removeChild(wrapper.firstChild);
     }
 
-    const updatedPoducts = this.state.products.map((item) => item.id === targetId ? {...item, isSelected: true} : {...item, isSelected: false});
-    updatedPoducts.forEach((item) => productWrapper.appendChild(this.generateAvailableProduct(item)));
-    this.state.products = updatedPoducts;
+    const updatedPoducts = this.state.db_products.map((item) => item.id === targetId ? {...item, isSelected: true} : {...item, isSelected: false});
+    updatedPoducts.forEach((item) => wrapper.appendChild(this.generateAvailableProduct(item)));
+    this.state.db_products = updatedPoducts;
     // console.log('updatedPoducts', updatedPoducts);
 
     const formButton = document.querySelector('.form-choose__button');
-    if (formButton && !this.state.products.every((item) => item.isSelected)) formButton.removeAttribute('disabled');
+    if (formButton && !this.state.db_products.every((item) => item.isSelected)) formButton.removeAttribute('disabled');
 
-    this.actions('register-products-listener');
+    this.listeners('register-products-listener');
+},
+deleteProduct(e) {
+    const targetId = e.target.getAttribute('id');
+    const wrapper = document.querySelector('.content__section_1');
+    if (!targetId || !wrapper) return;
+
+    this.state.user_products = this.state.user_products.filter((item) => item.id !== targetId);
+    console.log('user_products>', this.state.user_products);
+
+    wrapper.childNodes.forEach((item) => {
+       if (item.getAttribute('id') === targetId) wrapper.removeChild(item);
+    });
 },
 computeProductsPrice() {
     console.log('computeProductsPrice');
     const button = document.querySelector(".content__btn");
-    const product = this.state.products.find((item) => item.isSelected);
+    const product = this.state.db_products.find((item) => item.isSelected);
     if (!button || !product) return;
     button.innerHTML = `Submit and Pay ${product.price.full} USD`
 },
-actions(type, e = null) {
+getUUID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+},
+listeners(type, e = null) {
     switch (type) {
         case 'submit-products-form':
             e.preventDefault();
@@ -146,7 +174,7 @@ actions(type, e = null) {
             productForm.style.display = "none";
             this.renderProductTemplates();
             this.computeProductsPrice();
-            console.log(this.state.products, e);
+            console.log(this.state.db_products, e);
             break;
         case 'register-products-listener':
             const productTemplatesMask = document.querySelectorAll(".mask");
@@ -154,6 +182,11 @@ actions(type, e = null) {
             if (!productTemplatesMask?.length) return;
             productTemplatesMask.forEach((item) => item.addEventListener('click', (e) => this.selectProduct(e)));
             break;
+        case 'register-delete-btn-listener':
+            const deleteButtons = document.querySelectorAll(".btn-close");
+
+            if (!deleteButtons) return;
+            deleteButtons.forEach((item) => item.addEventListener('click', (e) => this.deleteProduct(e)));
         default:
             break;
     }
