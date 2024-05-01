@@ -52,19 +52,19 @@ state: {
     ],
 },
 init() {
-    console.log('INIT');
+    console.log('init');
     const productWrapper = document.querySelector('.form-choose__section_2');
 
     if (!productWrapper || !this.state.products?.length) return;
-    this.state.products.forEach((item) => productWrapper.appendChild(this.generate(item)));
+    this.state.products.forEach((item) => productWrapper.appendChild(this.generateAvailableProduct(item)));
 
     this.actions('register-products-listener');
 
     const productForm = document.querySelector(".form-choose");
-    if (!productForm) productForm.addEventListener('submit', (e) => this.actions('submit-products-form', e));
+    if (productForm) productForm.addEventListener('submit', (e) => this.actions('submit-products-form', e));
 },
-generate(item) {
-    console.log('GENERATE');
+generateAvailableProduct(item) {
+    console.log('generateAvailableProduct');
     const product = document.createElement('fieldset');
     product.classList.add('form-choose__column', item.isSelected ? 'selected' : 'form-choose__column');
     product.innerHTML = `
@@ -78,8 +78,35 @@ generate(item) {
     `;
     return product;
 },
-update(e) {
-    console.log('UPDATE');
+renderProductTemplates() {
+    console.log('renderProductTemplates');
+    const product = this.state.products.find((item) => item.isSelected);
+    const wrapper = document.querySelector('.content__section_1');
+    if (!product || !wrapper) return;
+
+    const productTemplate = document.createElement('fieldset');
+    productTemplate.classList.add("form__fieldset", "form__fieldset-required");
+    
+    for (let i = 0; i < product.items; i ++) {
+        productTemplate.innerHTML = `
+            <div class="form__section_2">
+                <div class="form__title">
+                    <span class="title">Product ${i + 1}</span>
+                    <button class="btn-close" type="button"></button>
+                </div>
+                <label class="subtitle">Enter main keyword for the product
+                    <input class="form__input" type="text" placeholder="for example, sylicon wine cup" value="for example, sylicon wine cup" required>
+                </label>
+                <label class="subtitle">Enter link to the similar product as a reference
+                    <input class="form__input" type="url" placeholder="https://..." value="https://..." required>
+                </label>
+            </div>
+        `;
+        wrapper.appendChild(productTemplate.cloneNode(true));
+    }
+},
+selectProduct(e) {
+    console.log('selectProduct');
     const productWrapper = document.querySelector('.form-choose__section_2');
     const targetId = e.target.getAttribute('id');
 
@@ -91,26 +118,41 @@ update(e) {
     }
 
     const updatedPoducts = this.state.products.map((item) => item.id === targetId ? {...item, isSelected: true} : {...item, isSelected: false});
-    updatedPoducts.forEach((item) => productWrapper.appendChild(this.generate(item)));
+    updatedPoducts.forEach((item) => productWrapper.appendChild(this.generateAvailableProduct(item)));
     this.state.products = updatedPoducts;
-    console.log('updatedPoducts', updatedPoducts);
+    // console.log('updatedPoducts', updatedPoducts);
 
     const formButton = document.querySelector('.form-choose__button');
     if (formButton && !this.state.products.every((item) => item.isSelected)) formButton.removeAttribute('disabled');
 
     this.actions('register-products-listener');
 },
+computeProductsPrice() {
+    console.log('computeProductsPrice');
+    const button = document.querySelector(".content__btn");
+    const product = this.state.products.find((item) => item.isSelected);
+    if (!button || !product) return;
+    button.innerHTML = `Submit and Pay ${product.price.full} USD`
+},
 actions(type, e = null) {
     switch (type) {
         case 'submit-products-form':
             e.preventDefault();
+            const content = document.querySelector(".content");
+            const productForm = document.querySelector(".form-choose");
+
+            if (!content || !productForm) return;
+            content.style.display = "block";
+            productForm.style.display = "none";
+            this.renderProductTemplates();
+            this.computeProductsPrice();
             console.log(this.state.products, e);
             break;
         case 'register-products-listener':
             const productTemplatesMask = document.querySelectorAll(".mask");
 
             if (!productTemplatesMask?.length) return;
-            productTemplatesMask.forEach((item) => item.addEventListener('click', (e) => this.update(e)));
+            productTemplatesMask.forEach((item) => item.addEventListener('click', (e) => this.selectProduct(e)));
             break;
         default:
             break;
