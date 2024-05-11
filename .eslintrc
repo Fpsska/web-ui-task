@@ -9,6 +9,9 @@
         "prettier"
     ],
     "plugins": ["prettier"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "rules": {
         "prettier/prettier": [
             "warn",

@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 import { defineConfig } from 'vite';
-import { ViteMinifyPlugin } from 'vite-plugin-minify' 
-import { resolve} from 'path';
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import { resolve } from 'path';
 
 // /. imports
 
 export default defineConfig({
     server: {
-        port: '3000',
+        port: '3000'
     },
     build: {
         outDir: './build',
@@ -14,8 +15,14 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 products: resolve(__dirname, 'assets/pages/products.html'),
-                failed_payment: resolve(__dirname, 'assets/pages/failed_payment.html'),
-                successful_payment: resolve(__dirname, 'assets/pages/successful_payment.html')
+                failed_payment: resolve(
+                    __dirname,
+                    'assets/pages/failed_payment.html'
+                ),
+                successful_payment: resolve(
+                    __dirname,
+                    'assets/pages/successful_payment.html'
+                )
             },
             output: {
                 assetFileNames: ({ name }) => {
@@ -23,7 +30,7 @@ export default defineConfig({
                         return 'assets/images/[name]-[hash][extname]';
                     }
 
-                    if (/\.(ttf|woff|woff2|eot)$/.test(name ?? '')){
+                    if (/\.(ttf|woff|woff2|eot)$/.test(name ?? '')) {
                         return 'assets/fonts/[name]-[hash][extname]';
                     }
 
@@ -32,11 +39,10 @@ export default defineConfig({
                     }
 
                     return 'assets/[name]-[hash][extname]';
-                  },
+                }
             }
         }
     },
-    plugins: [
-        ViteMinifyPlugin({})
-    ]
+    plugins: [ViteMinifyPlugin({})],
+    base: 'web-ui-task'
 });
