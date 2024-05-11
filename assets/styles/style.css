@@ -1,3 +1,8 @@
+@import 'normalize.css';
+@import './media.css';
+
+/* /. imports */
+
 @font-face {
     font-family: "Gilroy-Bold";
     src: url("../fonts/Gilroy-Bold.woff") format("woff");

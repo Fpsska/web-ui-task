@@ -115,7 +115,6 @@ selectProduct(e) { // TODO: mb overwrite (delete only changed items, based on de
     console.log('selectProduct');
     const wrapper = document.querySelector('.form-choose__section_2');
     const targetId = e.target.getAttribute('id');
-
     if (!wrapper || !targetId) return;
 
     while (wrapper.firstChild) {  
@@ -152,7 +151,7 @@ computeProductsPrice() {
     const button = document.querySelector(".content__btn");
     const product = this.state.db_products.find((item) => item.isSelected);
     if (!button || !product) return;
-    if (this.state.user_products.length === 0) return button.innerHTML = "Nothing selected";
+    if (this.state.user_products.length === 0) return button.innerHTML = "Nothing selected. Go back";
     if (this.state.user_products.length === product.items) return button.innerHTML = `Submit and Pay ${product.price.full} USD`;
     button.innerHTML = `Submit and Pay ${product.price.each * this.state.user_products.length} USD`;
 },
@@ -162,12 +161,13 @@ listeners(type, e = null) {
             e.preventDefault();
             const content = document.querySelector(".content");
             const productForm = document.querySelector(".form-choose");
-
             if (!content || !productForm) return;
+
             content.style.display = "block";
             productForm.style.display = "none";
             this.renderProductTemplates();
             this.computeProductsPrice();
+            
             console.log(this.state.db_products);
             // window.location.replace('./successful_payment.html');
             // window.location.replace('./index.html');
