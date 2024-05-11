@@ -1,59 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link
+            rel="shortcut icon"
+            href="../image/favicon.png"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/normalize.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/media.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/style.css"
+        />
+        <title>Selection page</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/media.css">
-    <link rel="stylesheet" href="../styles/style.css">
-    <title>Selection page</title>
-</head>
+    <body>
+        <header>
+            <!--  -->
+        </header>
 
-<body>
+        <main class="main">
+            <div class="card">
+                <div class="card__wrapper">
+                    <form
+                        class="card__form form-choose"
+                        action="#"
+                    >
+                        <div class="form-choose__section_1">
+                            <h1 class="title">Adding more products</h1>
+                            <span class="subtitle"
+                                >The more items you check, the better the
+                                price.</span
+                            >
+                        </div>
 
-    <header>
-        <!--  -->
-    </header>
+                        <div class="form-choose__section_2"></div>
 
-
-    <main class="main">
-        <div class="card">
-            <div class="card__wrapper">
-
-                <form class="card__form form-choose" action="#">
-                    <div class="form-choose__section_1">
-                        <h1 class="title">Adding more products</h1>
-                        <span class="subtitle">The more items you check, the better the price.</span>
-                    </div>
-
-                    <div class="form-choose__section_2"></div>
-
-                    <div class="form-choose__section_3">
-                        <button class="btn form-choose__button" type="submit" disabled>Continue</button>
-                    </div>
-                </form>
-
-                <div class="content">
-                    <form class="form form-content" action="#">
-                        <div class="content__section_1"></div>
-                        <div class="content__section_2">
-                            <button class="btn content__btn" type="submit"></button>
+                        <div class="form-choose__section_3">
+                            <button
+                                class="btn form-choose__button"
+                                type="submit"
+                                disabled
+                            >
+                                Continue
+                            </button>
                         </div>
                     </form>
+
+                    <div class="content">
+                        <form
+                            class="form form-content"
+                            action="#"
+                        >
+                            <div class="content__section_1"></div>
+                            <div class="content__section_2">
+                                <button
+                                    class="btn content__btn"
+                                    type="submit"
+                                ></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
             </div>
-        </div>
-    </main>
+        </main>
 
-    <footer>
-        <!--  -->
-    </footer>
+        <footer>
+            <!--  -->
+        </footer>
 
-    <script src="../scripts/main.js"></script>
-</body>
-
+        <script
+            type="module"
+            src="../scripts/main.js"
+        ></script>
+    </body>
 </html>

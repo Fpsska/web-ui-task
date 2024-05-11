@@ -5,7 +5,10 @@ import { resolve } from 'path';
 
 // /. imports
 
+const isProductionMode = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
+    base: isProductionMode ? '/web-ui-task' : '/',
     server: {
         port: '3000'
     },
@@ -43,6 +46,5 @@ export default defineConfig({
             }
         }
     },
-    plugins: [ViteMinifyPlugin({})],
-    base: 'web-ui-task'
+    plugins: [ViteMinifyPlugin({})]
 });

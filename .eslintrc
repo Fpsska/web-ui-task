@@ -25,5 +25,6 @@
         "prefer-const": "warn",
         "comma-dangle": ["warn", "never"],
         "semi": ["warn", "always"]
-    }
+    },
+    "ignorePatterns": ["build", "node_modules"]
 }

@@ -1,51 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link
+            rel="shortcut icon"
+            href="../image/favicon.png"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/normalize.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/media.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../styles/style.css"
+        />
+        <title>Failed payment page</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/media.css">
-    <link rel="stylesheet" href="../styles/style.css">
-    <title>Failed payment page</title>
-</head>
+    <body>
+        <header>
+            <!--  -->
+        </header>
 
-<body>
-
-    <header>
-        <!--  -->
-    </header>
-
-    <main>
-        <div class="card">
-            <div class="card__wrapper">
-                <div class="payment">
-                    <div class="payment__section_1">
-                        <h1 class="title">Your payment failed</h1>
-                        <span class="subtitle">Sorry, but we’ve having trouble processing your payment. You have been
-                            not charged for this transaction.
-                        </span>
-                    </div>
-                    <div class="payment__section_2">
-                        <img class="payment__image" src="../images/failed-payment.png" alt="card">
-                    </div>
-                    <div class="payment__section_3">
-                        <form action="../../index.html">
-                            <button class="btn payment__button payment__button-danger" type="submit">Back</button>
-                        </form>
+        <main>
+            <div class="card">
+                <div class="card__wrapper">
+                    <div class="payment">
+                        <div class="payment__section_1">
+                            <h1 class="title">Your payment failed</h1>
+                            <span class="subtitle"
+                                >Sorry, but we’ve having trouble processing your
+                                payment. You have been not charged for this
+                                transaction.
+                            </span>
+                        </div>
+                        <div class="payment__section_2">
+                            <img
+                                class="payment__image"
+                                src="../images/failed-payment.png"
+                                alt="card"
+                            />
+                        </div>
+                        <div class="payment__section_3">
+                            <form action="../../index.html">
+                                <button
+                                    class="btn payment__button payment__button-danger"
+                                    type="submit"
+                                >
+                                    Back
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <footer>
-        <!--  -->
-    </footer>
+        <footer>
+            <!--  -->
+        </footer>
 
-    <script src="../scripts/main.js"></script>
-</body>
-
+        <script
+            type="module"
+            src="../scripts/main.js"
+        ></script>
+    </body>
 </html>

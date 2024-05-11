@@ -4,22 +4,22 @@
 /* /. imports */
 
 @font-face {
-    font-family: "Gilroy-Bold";
-    src: url("../fonts/Gilroy-Bold.woff") format("woff");
+    font-family: 'Gilroy-Bold';
+    src: url('../fonts/Gilroy-Bold.woff') format('woff');
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
-    font-family: "Gilroy-Medium";
-    src: url("../fonts/Gilroy-Medium.woff") format("woff");
+    font-family: 'Gilroy-Medium';
+    src: url('../fonts/Gilroy-Medium.woff') format('woff');
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
-    font-family: "Gilroy-SemiBold";
-    src: url("../fonts/Gilroy-SemiBold.woff") format("woff");
+    font-family: 'Gilroy-SemiBold';
+    src: url('../fonts/Gilroy-SemiBold.woff') format('woff');
     font-style: normal;
     font-weight: normal;
 }
@@ -76,7 +76,7 @@ button {
     background-color: var(--green-color);
     border-radius: 16px;
     color: var(--white-color);
-    font-family: "Gilroy-Bold";
+    font-family: 'Gilroy-Bold';
     font-size: 18px;
     padding: 12px 15px;
     width: 100%;
@@ -84,19 +84,19 @@ button {
 }
 
 .title {
-    font-family: "Gilroy-Bold";
+    font-family: 'Gilroy-Bold';
     font-size: 18px;
     color: var(--primary-color);
     margin-top: 0;
 }
 .title-green {
     color: var(--green-color);
-    font-family: "Gilroy-SemiBold";
+    font-family: 'Gilroy-SemiBold';
     padding: 0;
 }
 
 .subtitle {
-    font-family: "Gilroy-Medium";
+    font-family: 'Gilroy-Medium';
     font-size: 16px;
     color: var(--primary-color);
 }
@@ -161,7 +161,7 @@ button {
 }
 
 .form__input {
-    font-family: "Gilroy-Medium";
+    font-family: 'Gilroy-Medium';
     font-size: 16px;
     color: var(--secondary-color);
     margin-top: 8px;
@@ -185,7 +185,7 @@ button {
     grid-template-columns: 0.5fr 1fr;
 }
 .form__protection_text {
-    font-family: "Gilroy-Medium";
+    font-family: 'Gilroy-Medium';
     font-size: 14px;
     color: #afb4cc;
 }
@@ -219,8 +219,9 @@ button {
     .form-choose__subtitle {
         color: var(--green-color);
     }
-    
-    .custom-radio::before {  /* TODO: add coniditon .form-choose__input:checked + */
+
+    .custom-radio::before {
+        /* TODO: add coniditon .form-choose__input:checked + */
         opacity: 1;
     }
 }
@@ -258,7 +259,7 @@ button {
     position: relative;
 }
 .custom-radio::before {
-    content: "";
+    content: '';
     display: block;
     width: 12px;
     height: 12px;
@@ -282,12 +283,12 @@ button {
     grid-row-gap: 4px;
 }
 .form-choose__title {
-    font-family: "Gilroy-SemiBold";
+    font-family: 'Gilroy-SemiBold';
     font-size: 16px;
     color: #000;
 }
 .form-choose__subtitle {
-    font-family: "Gilroy-Medium";
+    font-family: 'Gilroy-Medium';
     font-size: 13px;
     color: #a7a2cb;
 }
@@ -315,7 +316,7 @@ button {
 /* /.payment pages */
 
 .btn-close {
-    background-image: url(../image/x-mark.svg);
+    background-image: url(../images/x-mark.svg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
