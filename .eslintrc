@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "no-console": "warn",
+        "quotes": ["error", "single"],
+        "no-unused-vars": "warn",
+        "prefer-const": "warn",
+        "comma-dangle": ["warn", "never"],
+        "semi": ["warn", "always"]
+    }
+}
