@@ -60,4 +60,4 @@ jobs:
               id: deployment
               uses: actions/deploy-pages@v4
               with:
-                  name: artifact-${{ matrix.os }}-${{ matrix.version }}
+                  artifact_name: artifact-${{ matrix.os }}-${{ matrix.version }}
