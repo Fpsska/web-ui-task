@@ -68,6 +68,13 @@ const app = {
             productForm.addEventListener('submit', (e) =>
                 this.listeners('submit-products-form', e)
             );
+
+        const contentForm = document.querySelector('.form-content');
+        if (contentForm) {
+            contentForm.addEventListener('submit', (e) =>
+                this.listeners('submit-content-form', e)
+            );
+        }
     },
     generateAvailableProduct(item) {
         console.log('generateAvailableProduct');
@@ -172,6 +179,19 @@ const app = {
         wrapper.childNodes.forEach((item) => {
             if (item.getAttribute('id') === targetId) wrapper.removeChild(item);
         });
+
+        if (!this.state.user_products.length) {
+            const form = document.querySelector('.form-content');
+            if (!form) return;
+
+            wrapper.style.display = 'none';
+
+            const section = document.createElement('div');
+            section.innerHTML =
+                '<img src="../images/icon-back.png" alt="go back image">';
+            section.classList.add('content__section_3');
+            form.prepend(section);
+        }
     },
     computeProductsPrice() {
         console.log('computeProductsPrice');
@@ -192,14 +212,22 @@ const app = {
                 const productForm = document.querySelector('.form-choose');
                 if (!content || !productForm) return;
 
-                content.style.display = 'block';
                 productForm.style.display = 'none';
+                content.style.display = 'block';
                 this.renderProductTemplates();
                 this.computeProductsPrice();
 
                 console.log(this.state.db_products);
-                // window.location.replace('./successful_payment.html');
-                // window.location.replace('./index.html');
+                break;
+            }
+            case 'submit-content-form': {
+                e.preventDefault();
+
+                if (!this.state.user_products.length) {
+                    return window.location.replace('../../index.html');
+                }
+
+                window.location.replace('./successful_payment.html');
                 break;
             }
             case 'register-products-listener': {

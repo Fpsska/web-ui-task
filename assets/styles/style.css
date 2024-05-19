@@ -129,7 +129,7 @@ button {
     grid-row-gap: 16px;
     grid-template-columns: var(--column);
     grid-template-rows: 0.65fr 0.75fr auto auto;
-    min-height: 451px;
+    min-height: 450px;
     position: relative;
 }
 
@@ -332,25 +332,34 @@ button {
 }
 .form-content {
     grid-row-gap: 10px;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto;
 }
 
 .content {
-    min-height: 451px;
+    min-height: 450px;
     display: none;
 }
 
 .content__section_1 {
     display: grid;
-    grid-row-gap: 18px !important;
+    grid-row-gap: 18px;
     grid-auto-columns: 1fr;
     grid-auto-rows: auto;
     max-height: 400px;
     overflow: auto;
+    position: relative;
 }
 .content__section_2 {
-    display: grid;
-    align-items: flex-end;
+    margin: auto 0 0 0;
+}
+.content__section_3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content__section_3 img {
+    max-width: 100%;
+    width: 50%;
 }
 .content__btn {
     width: 100%;
