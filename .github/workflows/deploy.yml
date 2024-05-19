@@ -1,4 +1,4 @@
-name: Deploy app on gh-pages
+name: Deploy app on github.io
 on:
     push:
         branches: ['gh-pages']

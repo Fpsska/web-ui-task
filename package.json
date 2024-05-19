@@ -8,6 +8,7 @@
         "build:dev": "vite build --mode development",
         "build:prod": "vite build",
         "preview": "vite preview",
+        "deploy": "npm run build:prod && git subtree push --prefix build origin gh-pages",
         "lint": "eslint -c .eslintrc --ext .js .",
         "lint:fix": "npm run lint -- --fix"
     },
