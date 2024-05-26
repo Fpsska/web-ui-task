@@ -1,59 +1,28 @@
+import db_products from '../../db.json';
+
 const app = {
     state: {
-        db_products: [
-            {
-                id: 'group-1',
-                items: 1,
-                price: {
-                    full: 24.99
-                },
-                isSelected: false
-            },
-            {
-                id: 'group-2',
-                items: 2,
-                price: {
-                    full: 44,
-                    each: 22,
-                    benefit: 12
-                },
-                isSelected: false
-            },
-            {
-                id: 'group-3',
-                items: 3,
-                price: {
-                    full: 60,
-                    each: 20,
-                    benefit: 20
-                },
-                isSelected: false
-            },
-            {
-                id: 'group-4',
-                items: 4,
-                price: {
-                    full: 72,
-                    each: 18,
-                    benefit: 28
-                },
-                isSelected: false
-            },
-            {
-                id: 'group-5',
-                items: 5,
-                price: {
-                    full: 80,
-                    each: 16,
-                    benefit: 36
-                },
-                isSelected: false
-            }
-        ],
+        db_products: db_products.products,
         user_products: []
     },
     init() {
+        // TODO: Add logic to handle current  PAGE for run only nessecery code
         console.log('init');
+
+        const cardForm = document.querySelector('.card__form.form');
+        if (cardForm) {
+            cardForm.addEventListener('submit', (e) =>
+                this.listeners('submit-card-form', e)
+            );
+        }
+
+        const addProductBtn = document.querySelector('.title.title-green');
+        if (addProductBtn) {
+            addProductBtn.addEventListener('click', (e) => {
+                this.listeners('handle-add-product-btn', e);
+            });
+        }
+
         const wrapper = document.querySelector('.form-choose__section_2');
 
         if (!wrapper || !this.state.db_products?.length) return;
@@ -77,6 +46,7 @@ const app = {
         }
     },
     generateAvailableProduct(item) {
+        // render products from DB
         console.log('generateAvailableProduct');
         const product = document.createElement('fieldset');
         product.classList.add(
@@ -84,10 +54,10 @@ const app = {
             item.isSelected ? 'selected' : 'form-choose__column'
         );
         product.innerHTML = `
-        <input class="form-choose__input" type="radio" name="product" checked=${item.isSelected}>
+        <input class="form-choose__input" type="radio" name="product" checked=${item.isSelected || false}>
         <span class="custom-radio"></span>
         <label class="form-choose__text">
-            <span class="form-choose__title">${item.items} products for ${item.price?.full} usd ${item.price?.benefit ? `/ ${item.price.each}$ for each` : ''}</span>
+            <span class="form-choose__title">${item.items.length} products for ${item.price?.full} usd ${item.price?.benefit ? `/ ${item.price.each}$ for each` : ''}</span>
             ${item.price?.benefit ? `<span class="form-choose__subtitle">You safe ${item.price.benefit}% on each patent check</span>` : ''} 
         </label>
         <span class="mask" id=${item.id}></span>
@@ -95,23 +65,40 @@ const app = {
         return product;
     },
     renderProductTemplates() {
+        // render user product list from selected DB product group
         console.log('renderProductTemplates');
-        const product = this.state.db_products.find((item) => item.isSelected);
-        const wrapper = document.querySelector('.content__section_1');
-        if (!product || !wrapper) return;
-
-        this.state.user_products = Array.from(
-            { length: product.items },
-            (_, idx) => ({ id: `${product.id}__product-${idx + 1}` })
+        const selectedDBProduct = this.state.db_products.find(
+            (item) => item.isSelected
         );
+        const wrapper = document.querySelector('.content__section_1');
+        if (!selectedDBProduct || !wrapper) return;
+
+        this.state.user_products = [
+            // TODO: remove conditions ||
+            {
+                ...selectedDBProduct,
+                items: [
+                    ...(this.state.user_products[0]?.items || []),
+                    ...selectedDBProduct.items
+                ],
+                price: {
+                    full:
+                        this.state.user_products[0]?.price.full ||
+                        0 + selectedDBProduct.price.full
+                }
+            }
+        ];
+        console.log('after merge>', this.state.user_products);
+
         const productTemplate = document.createElement('fieldset');
         productTemplate.classList.add(
             'form__fieldset',
             'form__fieldset-required'
         );
 
-        for (let i = 0; i < this.state.user_products.length; i++) {
-            const id = this.state.user_products[i].id;
+        for (let i = 0; i < this.state.user_products[0].items.length; i++) {
+            const id = `${this.state.user_products[0].id}_product-${i + 1}`;
+            const item = this.state.user_products[0].items[i];
             productTemplate.setAttribute('id', id);
             productTemplate.innerHTML = `
             <div class="form__section_2">
@@ -120,10 +107,10 @@ const app = {
                     <button class="btn-close" type="button" id=${id}></button>
                 </div>
                 <label class="subtitle">Enter main keyword for the product
-                    <input class="form__input" type="text" placeholder="for example, sylicon wine cup" value="for example, sylicon wine cup" required>
+                    <input class="form__input" type="text" placeholder="for example, sylicon wine cup" value=${item.name} required>
                 </label>
                 <label class="subtitle">Enter link to the similar product as a reference
-                    <input class="form__input" type="url" placeholder="https://..." value="https://..." required>
+                    <input class="form__input" type="url" placeholder="https://..." value=${item.url || ''}>
                 </label>
             </div>
         `;
@@ -163,6 +150,24 @@ const app = {
             formButton.removeAttribute('disabled');
 
         this.listeners('register-products-listener');
+    },
+    setInitProduct() {
+        console.log('setInitProduct');
+        const cardForm = document.querySelector('.card__form.form');
+        if (!cardForm) return;
+
+        const formData = new FormData(cardForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        if (!name || !email) return;
+
+        this.state.user_products = [
+            {
+                id: undefined,
+                items: [{ name, email }],
+                price: undefined
+            }
+        ];
     },
     deleteProduct(e) {
         console.log('deleteProduct');
@@ -206,6 +211,22 @@ const app = {
     },
     listeners(type, e = null) {
         switch (type) {
+            case 'handle-add-product-btn': {
+                e.preventDefault();
+
+                this.setInitProduct();
+                window.location.replace('./assets/pages/products.html');
+                break;
+            }
+            case 'submit-card-form': {
+                e.preventDefault();
+
+                this.setInitProduct();
+                window.location.replace(
+                    './assets/pages/successful_payment.html'
+                );
+                break;
+            }
             case 'submit-products-form': {
                 e.preventDefault();
                 const content = document.querySelector('.content');
@@ -217,7 +238,7 @@ const app = {
                 this.renderProductTemplates();
                 this.computeProductsPrice();
 
-                console.log(this.state.db_products);
+                // console.log(this.state.db_products);
                 break;
             }
             case 'submit-content-form': {

@@ -1,0 +1,112 @@
+{
+    "products": [
+        {
+            "id": "group-1",
+            "items": [
+                {
+                    "email": "example@mail.com",
+                    "name": "group-1__product-1"
+                }
+            ],
+            "price": {
+                "full": 24.99
+            }
+        },
+        {
+            "id": "group-2",
+            "items": [
+                {
+                    "email": "example@mail.com",
+                    "name": "group-2__product-1"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-2__product-2"
+                }
+            ],
+            "price": {
+                "full": 44,
+                "each": 22,
+                "benefit": 12
+            }
+        },
+        {
+            "id": "group-3",
+            "items": [
+                {
+                    "email": "example@mail.com",
+                    "name": "group-3__product-1"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-3__product-2"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-3__product-3"
+                }
+            ],
+            "price": {
+                "full": 60,
+                "each": 20,
+                "benefit": 20
+            }
+        },
+        {
+            "id": "group-4",
+            "items": [
+                {
+                    "email": "example@mail.com",
+                    "name": "group-4__product-1"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-4__product-2"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-4__product-3"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-4__product-4"
+                }
+            ],
+            "price": {
+                "full": 72,
+                "each": 18,
+                "benefit": 28
+            }
+        },
+        {
+            "id": "group-5",
+            "items": [
+                {
+                    "email": "example@mail.com",
+                    "name": "group-5__product-1"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-5__product-2"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-5__product-3"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-5__product-4"
+                },
+                {
+                    "email": "example@mail.com",
+                    "name": "group-5__product-5"
+                }
+            ],
+            "price": {
+                "full": 80,
+                "each": 16,
+                "benefit": 36
+            }
+        }
+    ]
+}
